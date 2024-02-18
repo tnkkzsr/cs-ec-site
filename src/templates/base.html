@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,21 @@
                 </form>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'top:account' %}">アカウント</a>
+                        
+                        {% if not user.is_authenticated %}
+                        <button class="btn btn-dark" onclick="location.href='{% url 'account:login' %}'">ログイン
+                        {% else %}
+                        <div class="dropdown">
+                            <button id="btnOpenMenu" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                メニューを開く
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
+                                <button class="dropdown-item btn btn-light" type="button" onclick="location.href='{% url 'account:my_page' user.pk %}'">マイページ
+                                <button class="dropdown-item btn btn-light" type="button" onclick="location.href='{% url 'account:logout' %}'">ログアウト</a>
+                            </div>
+                        </div>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

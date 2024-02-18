@@ -26,8 +26,6 @@ SECRET_KEY = 'django-insecure-c4iuji&%r$48p!cv77my*uncj^pea9*cy5bt26n4(fc)w)^e^i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -38,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'top.apps.TopConfig'
+    'top.apps.TopConfig',
+    'account.apps.AccountConfig'
 ]
 
 MIDDLEWARE = [
@@ -106,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+LOGIN_URL = 'account:login'
+LOGIN_REDIRECT_URL = 'top:top'
 
 TIME_ZONE = 'UTC'
 
