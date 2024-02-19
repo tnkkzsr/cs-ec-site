@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, resolve_url
+from django.shortcuts import render, redirect, resolve_url, HttpResponseRedirect
 from django.views import generic
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth import get_user_model
@@ -81,3 +81,20 @@ class PasswordChange(PasswordChangeView):
 
 class PasswordChangeDone(PasswordChangeDoneView):
     template_name = 'accounts/password_change_done.html'
+
+class UserDeleteView(OnlyYouMixin, generic.DeleteView):
+    User = get_user_model()
+    model = User
+    template_name = 'accounts/delete.html'
+    def get_success_url(self):
+        return resolve_url('account:delete_done')
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # 論理削除を行います。具体的な実装はモデルに依存します。
+        self.object.is_active = 0
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+class UserDeleteDoneView(generic.TemplateView):
+    template_name = 'accounts/delete_done.html'
