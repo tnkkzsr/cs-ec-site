@@ -1,2 +1,3 @@
 django
 pyyaml
+pillow==8.4.0
