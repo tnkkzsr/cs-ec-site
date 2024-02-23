@@ -9,7 +9,7 @@ User = get_user_model()
 
 '''ログイン用フォーム'''
 class LoginForm(AuthenticationForm):
-
+    username = forms.CharField(label='ユーザー名かメールアドレス', max_length=254)
     # bootstrap4対応
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,14 +21,23 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('last_name', 'first_name', 'email','username', )
+        fields = ('last_name', 'first_name', 'email','username', 'address', 'phone_number', 'profile_image', 'bio')
+        labels = {
+            'address':'住所',
+            'phone_number':'電話番号',
+            'profile_image':'プロフィール画像',
+            'bio':'自己紹介文'
+        }
 
     def __init__(self, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
+        self.fields['username'].required = False
+        self.fields['profile_image'].required = False
+        self.fields['bio'].required = False
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['required'] = '' # 全フィールドを入力必須
+
 
             # オートフォーカスとプレースホルダーの設定
             print(field.label)
@@ -44,14 +53,21 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('last_name', 'first_name', 'email', 'username',)
-
+        fields = ('last_name', 'first_name', 'email', 'username','address', 'phone_number', 'profile_image', 'bio')
+        labels = {
+            'address':'住所',
+            'phone_number':'電話番号',
+            'profile_image':'プロフィール画像',
+            'bio':'自己紹介文'
+        }
     # bootstrap4対応
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['username'].required = False
+        self.fields['profile_image'].required = False
+        self.fields['bio'].required = False
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['required'] = '' # 全フィールドを入力必須
 
 class MyPasswordChangeForm(PasswordChangeForm):
 
