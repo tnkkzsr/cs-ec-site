@@ -11,6 +11,7 @@
         <div class="col">
             <h4>■　登録情報</h4>
         </div>
+
         <div class="col text-right"><a href="{% url 'account:user_update' user.pk %}">更新</a></div>
     </div>
     <table class="table table-bordered">
@@ -31,6 +32,18 @@
                 <td>ユーザー名</td>
                 <td>{{ user.username }}</td>
             </tr>
+            <tr>
+                <td>住所</td>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <td>電話番号</td>
+                <td>{{ user.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>自己紹介文</td>
+                <td>{{ user.bio }}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -49,6 +62,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="text-center"><a href="{% url 'account:delete' user.pk %}" class="btn btn-danger" role="button">退会する</a></div>
+    <div class="text-center"><a href="{% url 'account:delete' user.pk %}" class="btn btn-danger" role="button">退会する</a>
+    </div>
 </div>
 {% endblock %}
