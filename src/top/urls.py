@@ -1,8 +1,9 @@
-from django.urls import path, include
+from django.urls import include, path
+
 from . import views
 
 app_name = 'top'
 
 urlpatterns = [
-    path('', views.TopView.as_view(), name='top')
+    path('', views.TopView, name='top')
 ]

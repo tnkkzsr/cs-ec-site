@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Products<br>
 
-<a href="{%url "items:add_item"%}">出品する</a> 
+<a href="{%url 'items:add_item' %}">出品する</a>
+<div class="card-columns">
+{% for item in items_list %}
+<div class="card " style="width: 18rem;">
+    {% if item.item_image%}
+    <img src="{{ item.item_image.url }}" class="card-img-top" style="height: 286px;" alt="">
+    {% else %}
+    <img src="https://picsum.photos/200/200" class="card-img-top" alt="">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{item.item_title}}</h5>
+        <p class="card-text">{{item.seller}}</p>
+    </div>
+</div>
+{% endfor %}
+</div>
 {% endblock %}

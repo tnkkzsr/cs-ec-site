@@ -1,11 +1,13 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.core.files.storage import FileSystemStorage
-from uuid import uuid4
-from django.db.models.signals import post_delete 
-from django.dispatch import receiver
-import shutil
 import os
+import shutil
+from uuid import uuid4
+
+from django.contrib.auth.models import AbstractUser
+from django.core.files.storage import FileSystemStorage
+from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
 
 class CustomFileSystemStorage(FileSystemStorage):
     def __init__(self, *args, **kwargs):
@@ -35,7 +37,7 @@ class User(AbstractUser):
     # 追加のフィールドを定義します
     address = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    profile_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage())
+    profile_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage(), default='/static/img/account/profile_default')
     bio = models.TextField(blank=True, null=True)
 
 class PaymentInfo(models.Model):
@@ -52,3 +54,5 @@ def delete_profile_image_folder(sender, instance, **kwargs):
     if instance.profile_image:
         folder_path = instance.profile_image.path.rsplit('/', 1)[0]
         shutil.rmtree(folder_path)
+        folder_path = f'media/item_images/{instance.id}'
+        shutil.rmtree(folder_path, ignore_errors=True)

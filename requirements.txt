@@ -1,3 +1,4 @@
 django
 pyyaml
-pillow==8.4.0
+pillow
+psycopg2

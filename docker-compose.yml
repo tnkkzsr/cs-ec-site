@@ -1,18 +1,14 @@
-version: '3'
+
+version: "3"
 
 services:
   db:
-    image: mysql:5.7
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: django-db
-      MYSQL_USER: django
-      MYSQL_PASSWORD: django
-    healthcheck:
-      test: mysqladmin ping -h localhost -u $$MYSQL_USER -p$$MYSQL_PASSWORD
-      timeout: 20s
-      retries: 10
-    command: --innodb-use-native-aio=0
+      - "POSTGRES_DB=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+
   web:
     platform: linux/arm64  # M1 Macなどで必要
     build: .
