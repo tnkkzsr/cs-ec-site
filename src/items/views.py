@@ -15,14 +15,14 @@ def Add_Item_page(request):
             item_category = form.cleaned_data['item_category']
             item_condition = form.cleaned_data['item_condition']
             item_price = form.cleaned_data['item_price']
-            # seller = request.user
+            seller = request.user
             Item.objects.create(
                 item_title=item_title,
                 item_explain=item_explain,
                 item_category=item_category,
                 item_condition=item_condition,
                 item_price=item_price,
-                # seller=seller
+                seller=seller
             )
             return redirect('items:add_item_completed')
     else:

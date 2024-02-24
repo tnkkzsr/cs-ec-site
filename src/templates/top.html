@@ -3,19 +3,23 @@
 {% block content %}
 
 <a href="{%url 'items:add_item' %}">出品する</a>
-<div class="card-columns">
-{% for item in items_list %}
-<div class="card " style="width: 18rem;">
-    {% if item.item_image%}
-    <img src="{{ item.item_image.url }}" class="card-img-top" style="height: 286px;" alt="">
-    {% else %}
-    <img src="https://picsum.photos/200/200" class="card-img-top" alt="">
-    {% endif %}
-    <div class="card-body">
-        <h5 class="card-title">{{item.item_title}}</h5>
-        <p class="card-text">{{item.seller}}</p>
+<div class="row row-cols-md-3">
+    
+    {% for item in items_list %}
+    <div class="col" style="margin: 0 0 40px 0;"> 
+        <div class="card " style="width: 90%; height: 100%;">
+            {% if item.item_image%}
+            <img src="{{ item.item_image.url }}" class="card-img-top" style="object-fit: contain; height: 80%;" alt="">
+            {% else %}
+            <img src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg" class="card-img-top" style="object-fit: contain;" alt="">
+            {% endif %}
+            <div class="card-body" style="height: 20%;">
+                <h5 class="card-title">{{item.item_title}}</h5>
+                <p class="card-text">{{item.seller}}</p>
+            </div>
+        </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
+    
 </div>
 {% endblock %}
