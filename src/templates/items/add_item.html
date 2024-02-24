@@ -6,7 +6,7 @@
     <h1>出品ページ</h1>
     <hr>
 
-    <form method="post" action="{%url 'items:add_item'%}">
+    <form method="post" action="{%url 'items:add_item'%}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             <label for="item_title_input" class="form-label">{{form.item_title.label_tag}}</label>
@@ -16,9 +16,13 @@
             <label for="item_explain_input" class="form-label">{{form.item_explain.label_tag}}</label>
             {{form.item_explain}}
         </div>
-        <div class="mb-3">
-            <label for="item_image_input" class="form-label">{{form.item_image.label_tag}}</label>
-            {{form.item_image}}
+        <div class="form-group">
+            <label for="inputFile">{{form.item_image.label_tag}}</label>
+            <div class="custom-file">
+                {{form.item_image}}
+                {% comment %} 次のコード書くとデザインきれいになるけれど、選択したファイル名が表示されなくなる
+                <label class="custom-file-label" for="inputFile">Choose file</label> {% endcomment %}
+            </div>
         </div>
         <div class="mb-3">
             <label for="item_category_input" class="form-label">{{form.item_category.label_tag}}</label>
@@ -36,5 +40,9 @@
             <button type="submit" class="btn btn-primary btn-lg">出品する</button>
         </div>
     </form>
+   
+    
 </div>
+
+
 {% endblock %}

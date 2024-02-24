@@ -19,6 +19,7 @@ class Add_Item_Form(forms.Form):
         label='商品の状態'
     )
     item_price = forms.IntegerField(label='価格',min_value=0)
+    item_image = forms.ImageField(label='商品の写真')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,5 +27,10 @@ class Add_Item_Form(forms.Form):
         self.fields['item_category'].widget.attrs['placeholder'] = 'カテゴリを入力してください'
         self.fields['item_price'].widget.attrs['placeholder'] = '価格を入力してください'
         for field in self.fields.values():
+            if field.label == '商品の写真':
+                field.widget.attrs['class'] = 'custom-file-label'
+                field.widget.attrs['id'] = 'inputFile'
+                field.widget.attrs['type'] = 'file'
             if field.label != '商品の状態':
                 field.widget.attrs['class'] = 'form-control'
+            

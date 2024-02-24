@@ -6,7 +6,7 @@
 <div class="row row-cols-md-3">
     
     {% for item in items_list %}
-    <div class="col" style="margin: 0 0 40px 0;"> 
+    <div class="col" style="margin: 0 0 40px 0; width: 380px; height: 534px;"> 
         <div class="card " style="width: 90%; height: 100%;">
             {% if item.item_image%}
             <img src="{{ item.item_image.url }}" class="card-img-top" style="object-fit: contain; height: 80%;" alt="">
