@@ -24,13 +24,12 @@ def Add_Item_page(request):
                 item_price=item_price,
                 # seller=seller
             )
-            return redirect('add_item_completed')
+            return redirect('items:add_item_completed')
     else:
         form = Add_Item_Form()
     
     return render(request, 'items/add_item.html', {'form': form})
 
-# 商品を出品するビュー
 
 # 商品追加完了ページへのビュー
 def Add_Item_Completed(request):

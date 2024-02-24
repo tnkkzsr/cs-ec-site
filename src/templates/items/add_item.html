@@ -6,7 +6,7 @@
     <h1>出品ページ</h1>
     <hr>
 
-    <form method="post" action="{%url 'items:add_item_completed'%}">
+    <form method="post" action="{%url 'items:add_item'%}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="item_title_input" class="form-label">{{form.item_title.label_tag}}</label>
