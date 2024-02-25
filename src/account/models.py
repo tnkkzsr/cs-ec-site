@@ -37,7 +37,7 @@ class User(AbstractUser):
     # 追加のフィールドを定義します
     address = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    profile_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage(), default='/static/img/account/profile_default')
+    profile_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage())
     bio = models.TextField(blank=True, null=True)
 
 class PaymentInfo(models.Model):

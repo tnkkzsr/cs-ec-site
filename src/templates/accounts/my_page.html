@@ -1,13 +1,14 @@
 {% extends 'accounts/base.html' %}
+{% load static %}
 
 <!-- コンテンツ -->
 {% block content %}
 <div class="container">
     <h1>My page</h1>
     {% if user.profile_image %}
-        <img src="{{ user.profile_image.url }}" class="img-circle">
+    <img src="{{ user.profile_image.url }}" class="rounded float-end">
     {% else %}
-        <img src="media/profile_images/default.png" class="img-circle">
+    <img src="{% static 'img/account/profile_default.png' %}" class="rounded float-end">
     {% endif %}
     <hr>
 
