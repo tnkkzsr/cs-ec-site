@@ -1,0 +1,47 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="d-flex flex-row md-3 justify-content-around">
+    <div class="">
+        {% if item.item_image%}
+        <img src="{{ item.item_image.url }}" alt="">
+        {% else %}
+        <img src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg" alt="">
+        {% endif %}
+    </div>
+    <div class="d-flex flex-column justify-content-around">
+            <h3>{{item.item_title}}</h3>
+            <h5>{{item.item_price}}円</h5>
+            <div>
+                <button id="likeButton" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: red;"></i></button>
+                <span id="likeCount">0</span> Likes
+            </div>
+            <button type="button" class="btn btn-danger">購入手続きへ</button>
+            <div>
+                <h4> 商品の説明</h4>
+                <h5> {{item.item_explain}}</h5>
+            </div>
+            <div>
+                <h4>商品の情報</h4>
+                ----------------------------------
+                <div class="d-flex justify-content-around">
+                    <h5>カテゴリー</h5>
+                    {{item.item_category}}
+                </div>
+                <div class="d-flex justify-content-around">
+                    <h5>商品の状態</h5>
+                    {{item.item_condition}}
+                </div>
+                <div class="">
+                    <h5>配送料の負担</h5>
+
+                </div>
+                <div class="">
+                    <h5>配送料の方法</h5>
+
+                </div>
+            </div>
+
+    </div>
+</div>
+{% endblock %}
