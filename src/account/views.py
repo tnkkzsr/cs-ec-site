@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect, resolve_url, HttpResponseRedirect
 from django.views import generic
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
-from .forms import LoginForm, SignupForm, UserUpdateForm, MyPasswordChangeForm
-from django.urls import reverse_lazy
+from .forms import LoginForm, SignupForm, UserUpdateForm, MyPasswordChangeForm, SetPasswordForm
+from .models import User
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.translation import gettext_lazy as _
 
 
 class AccountView(generic.TemplateView):
@@ -98,3 +102,24 @@ class UserDeleteView(OnlyYouMixin, generic.DeleteView):
 
 class UserDeleteDoneView(generic.TemplateView):
     template_name = 'accounts/delete_done.html'
+
+class PasswordReset(PasswordResetView):
+    subject_template_name = 'accounts/password_reset_subject.txt'
+    email_template_name = 'accounts/password_reset_email.txt'
+    template_name = 'accounts/password_reset.html'
+    success_url = reverse_lazy('account:password_reset_sent')
+
+class PasswordResetSent(PasswordResetDoneView):
+    template_name = 'accounts/password_reset_sent.html'
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    success_url = reverse_lazy('account:password_reset_complete')
+    template_name = 'accounts/password_reset_confirm.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["process_name"] = "Password Reset"
+        return context
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    template_name = 'accounts/password_reset_complete.html'
