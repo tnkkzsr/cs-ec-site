@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECサイト</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="{% static 'js/like.js' %}"></script>
 </head>
 
 <body>
@@ -54,6 +56,10 @@
         <!-- ここにコンテンツを追加 -->
         {% block content %}
         {% endblock %}
+    </div>
+
+    <div id="footer">
+        <p>&copy; 2024 Your Website | Designed by K.kojima</p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

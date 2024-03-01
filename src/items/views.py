@@ -1,5 +1,6 @@
-from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import Add_Item_Form
 from .models import Item
@@ -39,3 +40,16 @@ def Add_Item_page(request):
 def Add_Item_Completed(request):
     
     return render (request, 'items/add_item_completed.html')
+
+
+def Item_Detail(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    if request.method == 'POST' and request.POST.get('action') == 'like':
+        current_likes = request.session.get('likes', 0)
+        new_likes = current_likes + 1
+        request.session['likes'] = new_likes
+
+        # 応答を作成して返す
+        return JsonResponse({'success': True, 'likes': new_likes})
+    else:
+        return render(request, 'items/item_detail.html', {'item':item})
