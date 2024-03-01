@@ -22,14 +22,16 @@ class Item(models.Model):
     item_price = models.IntegerField()
     seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     item_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage())
-
+    likes = models.IntegerField(default=0, blank=True, null=True)
+    LikeUsers = models.ManyToManyField(User, related_name='user', blank=True)
 
 
     def __str__(self):
         return self.item_title
     
     
-
+'''class Like(models.Model):
+    item_id = '''
 
 
 
