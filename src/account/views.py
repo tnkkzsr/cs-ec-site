@@ -104,17 +104,17 @@ class UserDeleteDoneView(generic.TemplateView):
     template_name = 'accounts/delete_done.html'
 
 class PasswordReset(PasswordResetView):
-    subject_template_name = 'accounts/password_reset_subject.txt'
-    email_template_name = 'accounts/password_reset_email.txt'
-    template_name = 'accounts/password_reset.html'
+    subject_template_name = 'accounts/password_reset/subject.txt'
+    email_template_name = 'accounts/password_reset/email.txt'
+    template_name = 'accounts/password_reset/reset.html'
     success_url = reverse_lazy('account:password_reset_sent')
 
 class PasswordResetSent(PasswordResetDoneView):
-    template_name = 'accounts/password_reset_sent.html'
+    template_name = 'accounts/password_reset/sent.html'
 
 class PasswordResetConfirm(PasswordResetConfirmView):
     success_url = reverse_lazy('account:password_reset_complete')
-    template_name = 'accounts/password_reset_confirm.html'
+    template_name = 'accounts/password_reset/confirm.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -122,4 +122,4 @@ class PasswordResetConfirm(PasswordResetConfirmView):
         return context
 
 class PasswordResetComplete(PasswordResetCompleteView):
-    template_name = 'accounts/password_reset_complete.html'
+    template_name = 'accounts/password_reset/complete.html'
