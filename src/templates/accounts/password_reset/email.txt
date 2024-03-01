@@ -1,0 +1,8 @@
+
+
+{{ user.username }}様へ
+あなたのアカウントへパスワードの変更要求がありました．以下のリンクからパスワードの変更を行うことができます:
+{{ protocol }}://{{ domain }}{% url 'account:password_reset_confirm' uidb64=uid token=token %}
+もしこのメールに心当たりがない場合には申し訳ありませんがこのメールの内容は無視してください．
+平素よりのサービスの利用誠にありがとうございます．
+CSECsite

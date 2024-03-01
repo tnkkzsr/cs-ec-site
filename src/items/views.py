@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 from .forms import Add_Item_Form
 from .models import Item
 
 
 # 商品を出品するフォームページを表示するビュー
+@login_required
 def Add_Item_page(request):
     # フォームが送信された場合
     if request.method == "POST":
