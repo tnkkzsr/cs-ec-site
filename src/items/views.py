@@ -5,6 +5,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import Add_Item_Form
 from .models import Item
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 
 # 商品を出品するフォームページを表示するビュー
 @login_required
@@ -53,3 +56,19 @@ def Item_Detail(request, item_id):
         return JsonResponse({'success': True, 'likes': new_likes})
     else:
         return render(request, 'items/item_detail.html', {'item':item})
+    
+# 商品のいいねをするためのビュー
+class LikeItem(APIView):
+    def post(self, request, item_id):
+        item = get_object_or_404(Item, pk=item_id)
+        
+        # ユーザーがまだいいねしていない場合のみitem.likesを増やす
+        if not item.LikeUsers.filter(pk=request.user.pk).exists():
+            item.LikeUsers.add(request.user)
+            item.likes += 1
+            request.session['likes'] = item.likes
+            item.save()
+            
+        return Response({'success': True, 'likes': item.likes})
+        
+        

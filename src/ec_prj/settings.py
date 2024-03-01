@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'top.apps.TopConfig',
     'account.apps.AccountConfig',
     'items',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

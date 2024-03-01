@@ -1,4 +1,9 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{%block js%}
+<script src="{% static 'js/like.js' %}"></script>
+{% endblock%}
 
 {% block content %}
 <div class="d-flex flex-row md-3 justify-content-around">
@@ -13,8 +18,12 @@
             <h3>{{item.item_title}}</h3>
             <h5>{{item.item_price}}円</h5>
             <div>
-                <button id="likeButton" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: red;"></i></button>
-                <span id="likeCount">0</span> Likes
+                {% if request.user in item.LikeUsers.all %}
+                    <button id="likeButton" type="button" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: red;"></i></button>
+                {% else %}
+                    <button id="likeButton" type="button" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: #ccc;"></i></button>
+                {% endif %}
+                <span id="likeCount">{{item.likes}}</span> Likes
             </div>
             <button type="button" class="btn btn-danger">購入手続きへ</button>
             <div>

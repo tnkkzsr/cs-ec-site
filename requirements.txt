@@ -3,3 +3,4 @@ pyyaml
 pillow
 psycopg2
 django-cors-headers
+djangorestframework
