@@ -68,7 +68,14 @@ class LikeItem(APIView):
             item.likes += 1
             request.session['likes'] = item.likes
             item.save()
-            
+        
+        else:
+            user = get_object_or_404(item.LikeUsers, pk=request.user.pk)
+            item.LikeUsers.remove(user)
+            item.likes -= 1
+            request.session['likes'] = item.likes
+            item.save()
+
         return Response({'success': True, 'likes': item.likes})
         
         
