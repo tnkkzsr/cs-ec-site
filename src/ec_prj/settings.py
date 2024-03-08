@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'items',
     'rest_framework',
+    'settlement',
 ]
 
 MIDDLEWARE = [
