@@ -14,7 +14,11 @@
             <img src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg" class="card-img-top" style="object-fit: contain;" alt="">
             {% endif %}
             <div class="card-body" style="height: 20%;">
+                {% if item.is_bought == False %}
                 <h5 class="card-title"><a href="{% url 'items:item_details' item.id %}" target="_blank" rel="noopener noreferrer">{{item.item_title}}</a></h5>
+                {% else %}
+                <h5 class="card-title text-muted">売り切れ</h5>
+                {% endif %}
                 <p class="card-text">{{item.seller}}</p>
             </div>
         </div>

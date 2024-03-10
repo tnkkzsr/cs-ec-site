@@ -29,10 +29,6 @@ def confirm(request, item_id):
         
         return render(request, 'settlement/AddressSelect.html', {'item':item, 'addresses':addresses})
 
-def completed(request):
-
-    return render(request, 'settlement/completed.html')
-
 class OnlyYouMixin(UserPassesTestMixin):
     raise_exception = True
 
@@ -52,12 +48,6 @@ class AddAddress(OnlyYouMixin, generic.TemplateView):
         item_id = request.session['item']
         print(request.POST.get("item_price"))
         return redirect('settlement:AddressSelect', item_id=item_id)
-
-
-def stripe(request):
-    item = request.session['item']
-    address = request.session['address']
-    return render(request, 'settlement/stripe.html', {'item':item, 'address':address})
 
 class PayView(generic.View):
     """
@@ -92,6 +82,9 @@ class PayView(generic.View):
         Trade.objects.create(item=item, purchaser=request.user, price=amount)
         
         #TODO 購入した商品を消去する
+        bought_item = Item.objects.get(pk=request.session['item'])
+        bought_item.is_bought = True
+        bought_item.save()
         
         context = {"amount": amount, "customer": customer, "charge": charge}
         return render(request, "settlement/completed.html", context)

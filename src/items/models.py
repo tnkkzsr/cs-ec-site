@@ -24,6 +24,7 @@ class Item(models.Model):
     item_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage())
     likes = models.IntegerField(default=0, blank=True, null=True)
     LikeUsers = models.ManyToManyField(User, related_name='user', blank=True)
+    is_bought = models.BooleanField(default=False, blank=True)
 
 
     def __str__(self):
