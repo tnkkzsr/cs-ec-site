@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import payjp
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'items',
     'rest_framework',
+    'settlement',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +153,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'csecsite@gmail.com'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # send_mailのfromがNoneの場合自動で入る。
 EMAIL_HOST_PASSWORD = 'gmhgzrlgunakstqi'
+

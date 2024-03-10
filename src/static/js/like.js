@@ -49,8 +49,8 @@ addlikeButton.addEventListener("click", function(){
     // いいねボタンの色を赤に変更
     const heartIcon = document.querySelector('#likeButton i');
     if (heartIcon) {
-        if (heartIcon.style.color == '#ccc') {
-            heartIcon.style.color = 'red';
+        if (heartIcon.style.color == 'rgb(204, 204, 204)') {
+            heartIcon.style.color = 'red'
         }
         else {
             heartIcon.style.color = '#ccc'

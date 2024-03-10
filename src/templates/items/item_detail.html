@@ -25,7 +25,7 @@
                 {% endif %}
                 <span id="likeCount">{{item.likes}}</span> Likes
             </div>
-            <button type="button" class="btn btn-danger">購入手続きへ</button>
+            <a href="{% url 'settlement:AddressSelect' item.pk %}" class="btn btn-danger" role="button">購入手続きへ</a>
             <div>
                 <h4> 商品の説明</h4>
                 <h5> {{item.item_explain}}</h5>

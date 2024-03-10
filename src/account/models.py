@@ -47,7 +47,14 @@ class PaymentInfo(models.Model):
 
     def __str__(self):
         return self.payment_details
-    
+
+class User_Additional_Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='additional_address')
+    additional_address = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.additional_address
+
 @receiver(post_delete, sender=User)
 def delete_profile_image_folder(sender, instance, **kwargs):
     # ユーザーが削除されたときにプロフィール画像フォルダを削除する関数

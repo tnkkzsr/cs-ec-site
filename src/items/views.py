@@ -78,4 +78,3 @@ class LikeItem(APIView):
 
         return Response({'success': True, 'likes': item.likes})
         
-        
