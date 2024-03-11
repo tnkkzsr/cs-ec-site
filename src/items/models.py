@@ -30,6 +30,16 @@ class Item(models.Model):
     def __str__(self):
         return self.item_title
     
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            saved_image = self.item_image
+            self.item_image = None
+            super().save(*args, **kwargs)
+            self.item_image = saved_image
+            if "force_insert" in kwargs:
+                kwargs.pop("force_insert")
+        super().save(*args, **kwargs)
+    
     
 '''class Like(models.Model):
     item_id = '''

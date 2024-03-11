@@ -1,7 +1,9 @@
 from django import forms
 
+from .models import Item
+
 class Add_Item_Form(forms.Form):
-    
+
     ITEM_CONDITION_CHOICES = [
         ('', '選択してください'),
         ('新品', '新品'),
@@ -33,4 +35,4 @@ class Add_Item_Form(forms.Form):
                 field.widget.attrs['type'] = 'file'
             if field.label != '商品の状態':
                 field.widget.attrs['class'] = 'form-control'
-            
+    
