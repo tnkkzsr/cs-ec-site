@@ -1,56 +1,110 @@
-{% extends '../base.html' %}
-{% load static %}
-
-{%block js%}
+{% extends '../base.html' %} {% load static %} {%block js%}
 <script src="{% static 'js/like.js' %}"></script>
-{% endblock%}
+{% endblock%} {% block content %}
+<div class="container-xl mb-5">
+    <div class="col-12">
+        <div class="row my-4">
+            <div class="col-12 col-sm-6">
+            <div class="row">
+                <div class="item_visual col-12 col-sm-10 order-sm-2 px-0 px-sm-3">
+                {% if item.item_image%}
+                <div class="slide-item">
+                    <img src="{{ item.item_image.url }}" alt="" class="img-fluid" />
+                </div>
+                {% else %}
+                <div class="slide-item">
+                    <img
+                    src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg"
+                    alt=""
+                    />
+                </div>
+                {% endif %}
+                </div>
+                <div class="col-12 col-sm-2 order-sm-1 pe-sm-0">
+                <div class="row">
+                    <div class="col-2 col-sm-12 pe-0 px-sm-2">
+                    {% if item.item_image%}
+                    <img
+                        src="{{ item.item_image.url }}"
+                        alt=""
+                        class="img-fluid pb-2"
+                    />
+                    {% else %}
+                    <img
+                        src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg"
+                        alt=""
+                        class="img-fluid pb-2"
+                    />
+                    {% endif %}
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
 
-{% block content %}
-<div class="d-flex flex-row md-3 justify-content-around">
-    <div class="">
-        {% if item.item_image%}
-        <img src="{{ item.item_image.url }}" alt="" class="img-fluid">
-        {% else %}
-        <img src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg" alt="">
-        {% endif %}
-    </div>
-    <div class="d-flex flex-column justify-content-around">
-            <h3>{{item.item_title}}</h3>
-            <h5>{{item.item_price}}円</h5>
+            <div class="col-12 col-sm-6">
+            <h1 class="fs-4 fw-bold pt-3">{{item.item_title}}</h1>
+
+            <h5 class="fs-4 pb-2 fw-bold text-danger">
+                <span class="price02-default">￥{{item.item_price}}</span>
+            </h5>
+
             <div>
                 {% if request.user in item.LikeUsers.all %}
-                    <button id="likeButton" type="button" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: red;"></i></button>
+                <button
+                id="likeButton"
+                type="button"
+                style="background: none; border: none"
+                >
+                <i class="bi bi-heart-fill" style="color: red"></i>
+                </button>
                 {% else %}
-                    <button id="likeButton" type="button" style="background: none; border: none;"><i class="bi bi-heart-fill" style="color: #ccc;"></i></button>
+                <button
+                id="likeButton"
+                type="button"
+                style="background: none; border: none"
+                >
+                <i class="bi bi-heart-fill" style="color: #ccc"></i>
+                </button>
                 {% endif %}
                 <span id="likeCount">{{item.likes}}</span> Likes
             </div>
-            <a href="{% url 'settlement:AddressSelect' item.pk %}" class="btn btn-danger" role="button">購入手続きへ</a>
-            <div>
-                <h4> 商品の説明</h4>
-                <h5> {{item.item_explain}}</h5>
+
+            <a
+                href="{% url 'settlement:AddressSelect' item.pk %}"
+                class="btn btn-danger"
+                role="button"
+                >購入手続きへ</a
+            >
+
+            <div class="my-4">
+                <h4>商品の説明</h4>
+                <h5>{{item.item_explain}}</h5>
             </div>
+
             <div>
                 <h4>商品の情報</h4>
-                ----------------------------------
+                -----------------------------------------------------
                 <div class="d-flex justify-content-around">
-                    <h5>カテゴリー</h5>
-                    {{item.item_category}}
+                <h5>カテゴリー</h5>
+                {{item.item_category}}
                 </div>
                 <div class="d-flex justify-content-around">
-                    <h5>商品の状態</h5>
-                    {{item.item_condition}}
+                <h5>商品の状態</h5>
+                {{item.item_condition}}
                 </div>
-                <div class="">
-                    <h5>配送料の負担</h5>
-
+                <div class="d-flex justify-content-around">
+                <h5>配送料の負担</h5>
+                　
                 </div>
-                <div class="">
-                    <h5>配送料の方法</h5>
-
+                <div class="d-flex justify-content-around">
+                <h5>配送料の方法</h5>
+                　
                 </div>
             </div>
-
+            </div>
+        </div>
     </div>
 </div>
-{% endblock %}
+  {% endblock %}
+</div>

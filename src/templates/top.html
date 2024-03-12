@@ -1,29 +1,42 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <a href="{%url 'items:add_item' %}">出品する</a>
 <div class="row row-cols-md-3">
-    
-    {% for item in items_list %}
-    <div class="col" style="margin: 0 0 40px 0; width: 380px; height: 534px;"> 
-        <div class="card "  style="width: 90%; height: 100%;">
-            {% if item.item_image%}
-            <img src="{{ item.item_image.url }}" class="card-img-top" style="object-fit: contain; height: 80%;" alt="">
-            {% else %}
-            <img src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg" class="card-img-top" style="object-fit: contain;" alt="">
-            {% endif %}
-            <div class="card-body" style="height: 20%;">
-                {% if item.is_bought == False %}
-                <h5 class="card-title"><a href="{% url 'items:item_details' item.id %}" target="_blank" rel="noopener noreferrer">{{item.item_title}}</a></h5>
-                {% else %}
-                <h5 class="card-title text-muted">売り切れ</h5>
-                {% endif %}
-                <p class="card-text">{{item.seller}}</p>
-            </div>
-        </div>
+  {% for item in items_list %}
+  <div class="col" style="margin: 0 0 40px 0; width: 380px; height: 534px">
+    <div class="card" style="width: 90%; height: 100%">
+      {% if item.item_image%}
+      <img
+        src="{{ item.item_image.url }}"
+        class="card-img-top"
+        style="object-fit: contain; height: 80%"
+        alt=""
+      />
+      {% else %}
+      <img
+        src="\media\item_images\item_None\20220110-00051273-bunshun-000-2-view.jpg"
+        class="card-img-top"
+        style="object-fit: contain"
+        alt=""
+      />
+      {% endif %}
+      <div class="card-body" style="height: 20%">
+        {% if item.is_bought == False %}
+        <h5 class="card-title">
+          <a
+            href="{% url 'items:item_details' item.id %}"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{item.item_title}}</a
+          >
+        </h5>
+        {% else %}
+        <h5 class="card-title text-muted">売り切れ</h5>
+        {% endif %}
+        <p class="card-text">{{item.seller}}</p>
+      </div>
     </div>
-    {% endfor %}
-    
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}
