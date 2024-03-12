@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.db.models import Q
 
 from items.models import Item
 
@@ -10,7 +11,15 @@ class TopView(generic.TemplateView):
 
 # Topページを表示するためのビュー
 def TopView(request):
-    items_list = Item.objects.all()
+    if request.method == "POST":
+        SearchWord = request.POST.get("search")
+        print(SearchWord)
+        items_list = Item.objects.filter(
+            Q(item_title__contains=SearchWord) |
+            Q(item_explain__contains=SearchWord)
+        )
+    else:
+        items_list = Item.objects.all()
     context = {
         "items_list":items_list,
     }
