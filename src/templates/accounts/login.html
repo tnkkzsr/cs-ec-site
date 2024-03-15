@@ -22,8 +22,9 @@
                     <input type="hidden" name="next" value="{{ next }}" />
                     {% csrf_token %}
                 </form>
+                <a href="{% url 'account:reset_password' %}">パスワードを忘れた場合</a>
                 <p>アカウントをお持ちでない場合</p>
-                <button class="btn btn-dark" onclick="location.href='{% url 'account:signup' %}'">サインイン
+                <a href="{% url 'account:signup' %}" class="btn btn-dark" role="button">サインイン</a>
             </div>
         </div>
     </div>

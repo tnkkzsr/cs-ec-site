@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" id="SelectAddress">
+    <div class="d-flex flex-row md-3 justify-content-around">
+        <div>
+            <h3>1．住所の登録</h3>
+            <div class="d-flex flex-column justify-content-around">
+
+                {% csrf_token %}
+                {% for address in addresses %}
+                <div class="form-check">
+                    {% if forloop.counter0 == 0 %}
+                    <input class="form-check-input" type="radio" value="{{address}}" name="Address"
+                        id="Address{{forloop.counter0}}" checked>
+                    {% else %}
+                    <input class="form-check-input" type="radio" value="{{address}}" name="Address"
+                        id="Address{{forloop.counter0}}">
+                    {% endif %}
+                    <label for="Address{{forloop.counter0}}">
+                        {{address}}
+                    </label>
+                </div>
+                {% endfor %}
+
+                <a href="{% url 'settlement:AddAddress' request.user.pk %}">＋住所を追加する</a>
+            </div>
+        </div>
+        <div>
+            <h3>{{item.item_title}}</h3>
+            <h5>{{item.item_price}}円</h5>
+            <input type="hidden" name="item_price" value="{{item.item_price}}">
+            <!-- <button class="btn btn-danger" type="submit" form="SelectAddress" onclick="static/js/add_item_price.js">決済画面に進む</button> -->
+            <button class="btn btn-danger" type="submit" form="SelectAddress">決済画面に進む</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

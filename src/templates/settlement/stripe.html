@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>item={{item}}</h3>
+<h3>address={{address}}</h3>
+<a href="{% url 'settlement:confirm' item %}" role="button" class="btn btn-dark">前のページに戻る</a>
+{% endblock %}
