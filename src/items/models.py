@@ -2,6 +2,7 @@ import os
 import shutil
 
 from django.core.files.storage import FileSystemStorage
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -19,7 +20,7 @@ class Item(models.Model):
     item_explain = models.TextField()
     item_category = models.CharField(max_length=100)
     item_condition = models.CharField(max_length=100)
-    item_price = models.IntegerField()
+    item_price = models.IntegerField(validators=[MinValueValidator(50), MaxValueValidator(9999999)])
     seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     item_image = models.ImageField(upload_to=user_directory_path, blank=True, null=True, storage=CustomFileSystemStorage())
     likes = models.IntegerField(default=0, blank=True, null=True)

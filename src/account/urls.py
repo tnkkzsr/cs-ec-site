@@ -1,7 +1,8 @@
-from django.urls import path, include
-from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import include, path
+
+from . import views
 
 app_name = 'account'
 
@@ -20,5 +21,6 @@ urlpatterns = [
     path('password_change/', views.PasswordChange.as_view(), name='password_change'),
     path('password_change_done/', views.PasswordChangeDone.as_view(), name='password_change_done'),
     path('delete/<int:pk>', views.UserDeleteView.as_view(), name='delete'),
-    path('delete_done/', views.UserDeleteDoneView.as_view(), name='delete_done')
+    path('delete_done/', views.UserDeleteDoneView.as_view(), name='delete_done'),
+    path('favorite_items/', views.FavoriteItems, name='favorite_items')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

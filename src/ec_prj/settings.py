@@ -154,3 +154,4 @@ EMAIL_HOST_USER = 'csecsite@gmail.com'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # send_mailのfromがNoneの場合自動で入る。
 EMAIL_HOST_PASSWORD = 'gmhgzrlgunakstqi'
 
+payjp.api_key = os.environ.get('PAYJP_SECRET_KEY')

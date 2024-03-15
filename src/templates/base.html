@@ -41,6 +41,7 @@
                                 ユーザメニュー
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnOpenMenu">
+                                <li><a class="dropdown-item" href="{% url 'account:favorite_items' %}">お気に入り</a></li>
                                 <li><a class="dropdown-item" href="{% url 'account:my_page' user.pk %}">マイページ</a></li>
                                 <li><a class="dropdown-item" href="{% url 'account:logout' %}">ログアウト</a></li>
                             </ul>

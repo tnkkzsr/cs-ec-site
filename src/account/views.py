@@ -1,14 +1,25 @@
-from django.shortcuts import render, redirect, resolve_url, HttpResponseRedirect
-from django.views import generic
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import UserPassesTestMixin
-from .forms import LoginForm, SignupForm, UserUpdateForm, MyPasswordChangeForm, SetPasswordForm
-from .models import User
-from django.urls import reverse_lazy, reverse
-from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordChangeDoneView,
+                                       PasswordChangeView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
+from django.shortcuts import (HttpResponseRedirect, redirect, render,
+                              resolve_url)
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views import generic
+
+from items.models import Item
+
+from .forms import (LoginForm, MyPasswordChangeForm, SetPasswordForm,
+                    SignupForm, UserUpdateForm)
+from .models import User
 
 
 class AccountView(generic.TemplateView):
@@ -123,3 +134,12 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 
 class PasswordResetComplete(PasswordResetCompleteView):
     template_name = 'accounts/password_reset/complete.html'
+
+def FavoriteItems(request):
+    # ログインユーザーのお気に入りアイテムを取得    
+    user = request.user
+    # favorite_items = user.item_set.all()
+    favorite_items = Item.objects.filter(LikeUsers=user)
+    
+    
+    return render(request,'accounts/favorite_items.html', {'favorite_items':favorite_items})
