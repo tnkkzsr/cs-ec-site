@@ -18,3 +18,5 @@ cs-ec-siteがカレントディレクトリの状態で "docker-compose up -d" �
 解約機能も作った．多分論理削除で実装できているはず
 
 パスワードリセット機能も作った．メールは"csecsite_at_gmail.com"から送信されて，パスワードはアプリパスワードを設定している．
+
+.envファイルを作成して「PAYJP_SECRET_KEY = {Discordに貼ってあるPayJPのAPIキー}」を追記
